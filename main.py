@@ -25,15 +25,15 @@ def start_timer():
 
     if reps % 8 == 0:
         countdown(long_break_sec)
-        timer_text.config(text="Break", fg=RED, bg=YELLOW)
+        timer_text.config(text="Break", fg=RED)
         reps = 0
     elif reps % 2 == 0:
         countdown(short_break_sec)
-        timer_text.config(text="Break", fg=PINK, bg=YELLOW)
+        timer_text.config(text="Break", fg=PINK)
     else:
         """ reps % 2 == 1:"""
         countdown(work_sec)
-        timer_text.config(text="Work", fg=GREEN, bg=YELLOW)
+        timer_text.config(text="Work", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
