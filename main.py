@@ -6,9 +6,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
-SHORT_BREAK_MIN = 2
-LONG_BREAK_MIN = 1
+WORK_MIN = 0.05
+SHORT_BREAK_MIN = 0.05
+LONG_BREAK_MIN = 0.05
 reps = 0
 timer = None
 
@@ -16,8 +16,9 @@ timer = None
 def reset_timer():
     global reps
     reps = 0
+    check_mark.config(text="")
     window.after_cancel(timer)
-    timer_text.config(text="Timer")
+    timer_title.config(text="Timer")
     canvas.itemconfig(timer_text, text="00:00")
 
 
@@ -33,7 +34,6 @@ def start_timer():
     if reps % 8 == 0:
         countdown(long_break_sec)
         timer_title.config(text="Break", fg=RED)
-        reps = 0
     elif reps % 2 == 0:
         countdown(short_break_sec)
         timer_title.config(text="Break", fg=PINK)
@@ -54,9 +54,10 @@ def countdown(count):
         timer = window.after(1000, countdown, count - 1)
     else:
         start_timer()
-
+        global marks
         marks=""
-        if reps % 2 == 1:
+        work_session = reps // 2
+        for _ in range (work_session):
             marks += "✓"
         check_mark.config(text=marks)
 
